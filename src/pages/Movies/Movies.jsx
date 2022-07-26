@@ -1,33 +1,53 @@
-import { Outlet, Link } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { getFindMovies } from '../../services/API';
+
 export const Movies = () => {
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
+  console.log(query);
+  const onChange = value => setQuery(value);
+
+  const getMovies = async query => {
+    const { results } = await getFindMovies(query);
+
+    navigate(`/movies/query=${query}`, { replace: false });
+
+    console.log(results);
+    setMovies(results);
+  };
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    getMovies(query);
+    setQuery('');
+  };
+
+  // useEffect(() => {
+  //   getMovies(query);
+  // }, [query]);
+
   return (
     <main>
-      <h1>About Us</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
-        laborum amet ab cumque sit nihil dolore modi error repudiandae
-        perspiciatis atque voluptas corrupti, doloribus ex maiores quam magni
-        mollitia illum dolor quis alias in sequi quod. Sunt ex numquam hic
-        asperiores facere natus sapiente cum neque laudantium quam, expedita
-        voluptates atque quia aspernatur saepe illo, rem quasi praesentium
-        aliquid sed inventore obcaecati veniam? Nisi magnam vero, dolore
-        praesentium totam ducimus similique asperiores culpa, eius amet
-        repudiandae quam ut. Architecto commodi, tempore ut nostrum voluptas
-        dolorum illum voluptatum dolores! Quas perferendis quis alias excepturi
-        eaque voluptatibus eveniet error, nulla rem iusto?
-      </p>
+      <div>
+        <form action="" onSubmit={handleFormSubmit}>
+          <input
+            type="text"
+            value={query}
+            onChange={({ target: { value } }) => onChange(value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+      </div>
       <ul>
-        <li>
-          <Link to="mission">Read about our mission</Link>
-        </li>
-        <li>
-          <Link to="team">Get to know the team</Link>
-        </li>
-        <li>
-          <Link to="reviews">Go through the reviews</Link>
-        </li>
+        {movies.map(item => (
+          <li key={item.id}>
+            <Link to={`/movies/${item.id}`}>{item.title}</Link>
+          </li>
+        ))}
       </ul>
-      <Outlet />
     </main>
   );
 };
