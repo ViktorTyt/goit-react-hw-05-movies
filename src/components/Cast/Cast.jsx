@@ -2,6 +2,8 @@ import { SRCKEY, getCast } from '../../services/API';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Image } from './Cast.styled';
+// import { MdImageNotSupported } from 'react-icons/md';
+import imageNotFound from '../../images/image-not-found.png';
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -30,7 +32,10 @@ export const Cast = () => {
         .filter(({ order }) => order <= 10)
         .map(({ character, name, profile_path }) => (
           <li>
-            <Image src={`${SRCKEY}${profile_path}`} alt={name} />
+            <Image
+              src={profile_path ? `${SRCKEY}${profile_path}` : imageNotFound}
+              alt={name}
+            />
             {name}
             <p>{character}</p>
           </li>

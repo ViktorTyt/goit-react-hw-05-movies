@@ -10,24 +10,15 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    let controller = new AbortController();
-    console.log(controller);
-    // let isCancelled = true;
     getPopularMovies();
-
-    return () => {
-      controller?.abort();
-    };
   }, []);
 
-  // const results = getPopularMovies();
-  console.log(popMovies);
   return (
     <main>
       <ul>
-        {popMovies.map(item => (
-          <li key={item.id}>
-            <Link to={`/movies/${item.id}`}>{item.title}</Link>
+        {popMovies.map(({ id, title }) => (
+          <li key={id}>
+            <Link to={`/movies/${id}`}>{title}</Link>
           </li>
         ))}
       </ul>

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Wrapper, Image, Description, Link } from './MovieDetails.styled';
 
-import { getMovieDetails } from '../../services/API';
+import { SRCKEY, getMovieDetails } from '../../services/API';
 import { Outlet } from 'react-router-dom';
 
 export const MovieDetails = () => {
@@ -32,20 +32,20 @@ export const MovieDetails = () => {
   //   <li key={index + 1}>{name} </li>
   // ));
 
-  const KEYSRC = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
+  const { title, vote_average, overview, poster_path } = movie;
+  console.log(genres);
   return (
     <main>
       <section>
         <Wrapper>
           <div>
-            <Image src={KEYSRC} alt={movie.title} />
+            <Image src={`${SRCKEY}${poster_path}`} alt={title} loading="lazy" />
           </div>
           <Description>
-            <h1>{movie.title}</h1>
-            <p>User score {(movie.vote_average * 10).toFixed(2)} %</p>
+            <h1>{title}</h1>
+            <p>User score {(vote_average * 10).toFixed(2)} %</p>
             <h3>Overview</h3>
-            <p>{movie.overview}</p>
+            <p>{overview}</p>
             <h3>Genres</h3>
             <ul>
               {genres.map(({ name }, index) => (

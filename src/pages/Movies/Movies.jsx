@@ -1,19 +1,26 @@
-// import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { getFindMovies } from '../../services/API';
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { SearchBar } from 'components/SearchBar/SearchBar';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
 export const Movies = () => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const navigate = useNavigate();
-  console.log(query);
-  const onChange = value => setQuery(value);
+  // const t = useMatch();
+  // console.log(t);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const movieName = searchParams.get('name') ?? '';
+  const { pathname } = useLocation();
+  console.log(pathname);
+
+  const handleInputChange = value => setQuery(value);
 
   const getMovies = async query => {
     const { results } = await getFindMovies(query);
 
-    navigate(`/movies/query=${query}`, { replace: false });
+    // navigate(`/movies/query=${query}`, { replace: false });
 
     console.log(results);
     setMovies(results);
@@ -21,33 +28,27 @@ export const Movies = () => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    getMovies(query);
+    const name = e.target.query.value;
+
+    const nextParams = name !== '' ? { name } : {};
+    setSearchParams(nextParams);
     setQuery('');
   };
 
-  // useEffect(() => {
-  //   getMovies(query);
-  // }, [query]);
+  useEffect(() => {
+    if (movieName === '') return;
+
+    getMovies(movieName);
+  }, [movieName]);
 
   return (
     <main>
-      <div>
-        <form action="" onSubmit={handleFormSubmit}>
-          <input
-            type="text"
-            value={query}
-            onChange={({ target: { value } }) => onChange(value)}
-          />
-          <button type="submit">Search</button>
-        </form>
-      </div>
-      <ul>
-        {movies.map(item => (
-          <li key={item.id}>
-            <Link to={`/movies/${item.id}`}>{item.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <SearchBar
+        query={query}
+        onChange={handleInputChange}
+        onSubmit={handleFormSubmit}
+      />
+      <MoviesList movies={movies} />
     </main>
   );
 };
