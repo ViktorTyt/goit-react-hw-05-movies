@@ -1,6 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Wrapper, Image, Description, Link } from './MovieDetails.styled';
+import {
+  Wrapper,
+  WrapperImage,
+  Image,
+  Description,
+  Link,
+} from './MovieDetails.styled';
 
 import { SRCKEY, getMovieDetails } from '../../services/API';
 import { Outlet } from 'react-router-dom';
@@ -38,9 +44,9 @@ export const MovieDetails = () => {
     <main>
       <section>
         <Wrapper>
-          <div>
+          <WrapperImage>
             <Image src={`${SRCKEY}${poster_path}`} alt={title} loading="lazy" />
-          </div>
+          </WrapperImage>
           <Description>
             <h1>{title}</h1>
             <p>User score {(vote_average * 10).toFixed(2)} %</p>

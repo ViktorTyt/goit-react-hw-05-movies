@@ -7,11 +7,11 @@ import { Global, ThemeProvider } from '@emotion/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-  <ThemeProvider theme={theme}>
-    <Global styles={GlobalStyles} />
-    <BrowserRouter>
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <Global styles={GlobalStyles} />
       <App />
-    </BrowserRouter>
-  </ThemeProvider>
+    </ThemeProvider>
+  </BrowserRouter>
   // </React.StrictMode>
 );

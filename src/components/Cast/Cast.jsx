@@ -1,9 +1,9 @@
 import { SRCKEY, getCast } from '../../services/API';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Image } from './Cast.styled';
+import { Image, List, Item } from './Cast.styled';
 // import { MdImageNotSupported } from 'react-icons/md';
-import imageNotFound from '../../images/image-not-found.png';
+import imageNotFound from '../../images/not_found.png';
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -24,22 +24,24 @@ export const Cast = () => {
   }, [movieId]);
 
   return (
-    <ul>
+    <List>
       {error && (
         <p>{'List of cast is not available 😕. Please, try again later'}</p>
       )}
       {cast
-        .filter(({ order }) => order <= 10)
-        .map(({ character, name, profile_path }) => (
-          <li>
+        .filter((_, index) => index <= 11)
+        .map(({ id, character, name, profile_path }) => (
+          <Item key={id}>
             <Image
               src={profile_path ? `${SRCKEY}${profile_path}` : imageNotFound}
               alt={name}
             />
-            {name}
-            <p>{character}</p>
-          </li>
+            <div>
+              <h3>{name}</h3>
+              <p>{character}</p>
+            </div>
+          </Item>
         ))}
-    </ul>
+    </List>
   );
 };
