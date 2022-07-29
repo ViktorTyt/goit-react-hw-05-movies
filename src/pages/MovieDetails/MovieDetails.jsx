@@ -2,10 +2,12 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
   Wrapper,
-  WrapperImage,
   Image,
   Description,
+  Genres,
   Link,
+  MoreInfoBox,
+  MoreInfoTitle,
 } from './MovieDetails.styled';
 
 import { SRCKEY, getMovieDetails } from '../../services/API';
@@ -14,16 +16,16 @@ import { Outlet } from 'react-router-dom';
 export const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
+  const [error, setError] = useState(null);
   const { movieId } = useParams();
 
   const getInfoAboutMovie = async id => {
     try {
       const results = await getMovieDetails(id);
-      console.log(results);
       setMovie(results);
       setGenres(results.genres);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -34,40 +36,35 @@ export const MovieDetails = () => {
     //     second
     //   }
   }, [movieId]);
-  // const genresMarkup = genres.map(({ name }, index) => (
-  //   <li key={index + 1}>{name} </li>
-  // ));
 
   const { title, vote_average, overview, poster_path } = movie;
-  console.log(genres);
   return (
     <main>
       <section>
         <Wrapper>
-          <WrapperImage>
-            <Image src={`${SRCKEY}${poster_path}`} alt={title} loading="lazy" />
-          </WrapperImage>
+          <Image src={`${SRCKEY}${poster_path}`} alt={title} loading="lazy" />
+
           <Description>
             <h1>{title}</h1>
-            <p>User score {(vote_average * 10).toFixed(2)} %</p>
+            <p>User score: {Math.round(vote_average * 10)}%</p>
             <h3>Overview</h3>
             <p>{overview}</p>
             <h3>Genres</h3>
-            <ul>
+            <Genres>
               {genres.map(({ name }, index) => (
                 <li key={index + 1}>{name} </li>
               ))}
-            </ul>
+            </Genres>
           </Description>
         </Wrapper>
       </section>
-      <div>
-        <p>Additianal information</p>
+      <MoreInfoBox>
+        <MoreInfoTitle>Additianal information</MoreInfoTitle>
         <ul>
           <Link to="cast">Cast</Link>
           <Link to="reviews">Reviews</Link>
         </ul>
-      </div>
+      </MoreInfoBox>
       <Outlet />
     </main>
   );

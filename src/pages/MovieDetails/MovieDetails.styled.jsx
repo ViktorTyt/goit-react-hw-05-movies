@@ -5,7 +5,7 @@ import { theme } from '../../styles';
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   box-shadow: ${theme.shadows.regular};
 
   @media screen and (min-width: 768px) {
@@ -13,25 +13,36 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const WrapperImage = styled.div`
-  @media screen and (min-width: 768px) {
-    // width: 500px;
-    // height: auto;
-  }
-`;
 export const Image = styled.img`
   height: auto;
   max-width: 100%;
 
   @media screen and (min-width: 768px) {
-      height: auto;
-  max-width: 320px;
+    height: auto;
+    max-width: 280px;
+  }
 `;
 
 export const Description = styled.div`
   padding: 24px;
 `;
 
+export const Genres = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+`;
+
+export const MoreInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${theme.spacing(6)};
+`;
+
+export const MoreInfoTitle = styled.h3`
+  font-size: ${theme.fontSizes.large};
+`;
 export const Link = styled(NavLink)`
   display: inline-flex;
   flex-direction: column;
@@ -43,6 +54,6 @@ export const Link = styled(NavLink)`
 
   &.active {
     color: white;
-    background-color: orangered;
+    background-color: ${theme.colors.royalBlue};
   }
 `;

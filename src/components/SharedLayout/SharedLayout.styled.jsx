@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { theme } from '../../styles';
 import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -11,10 +12,12 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   gap: 12px;
   padding: 8px 0;
   margin-bottom: 16px;
   border-bottom: 1px solid black;
+  box-shadow: ${theme.shadows.regular};
 
   > nav {
     display: flex;
@@ -35,6 +38,6 @@ export const Link = styled(NavLink)`
 
   &.active {
     color: white;
-    background-color: orangered;
+    background-color: blue;
   }
 `;

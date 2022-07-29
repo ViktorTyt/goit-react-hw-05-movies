@@ -4,7 +4,7 @@ const SRCKEY = 'https://image.tmdb.org/t/p/w500';
 
 const getGenresList = async () => {
   const response = await axios(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY}&language=uk`
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY}&language=en-US`
   );
   const genresList = await response.json();
 
@@ -13,7 +13,7 @@ const getGenresList = async () => {
 
 const getPopularList = async () => {
   const { data } = await axios(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${KEY}&language=uk`
+    `https://api.themoviedb.org/3/movie/popular?api_key=${KEY}&language=en-US`
   );
 
   return data;
@@ -21,28 +21,28 @@ const getPopularList = async () => {
 
 const getMovieDetails = async id => {
   const { data } = await axios(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${KEY}&language=uk`
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${KEY}&language=en-US`
   );
   return data;
 };
 
 const getCast = async id => {
   const { data } = await axios(
-    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${KEY}&language=uk`
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${KEY}&language=en-US`
   );
   return data;
 };
 
 const getReviews = async id => {
   const { data } = await axios(
-    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${KEY}&language=uk`
+    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${KEY}&language=en-US`
   );
   return data;
 };
 
 const getFindMovies = async query => {
   const { data } = await axios(
-    `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&query=${query}&language=uk&page=1&include_adult=false`
+    `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&query=${query}&language=en-US&page=1&include_adult=false`
   );
   return data;
 };

@@ -22,7 +22,6 @@ export const Movies = () => {
 
     // navigate(`/movies/query=${query}`, { replace: false });
 
-    console.log(results);
     setMovies(results);
   };
 

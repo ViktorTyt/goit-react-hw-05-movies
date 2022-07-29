@@ -1,6 +1,7 @@
 import { getReviews } from '../../services/API';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Item, Title } from './Reviews.styled';
 
 export const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -10,7 +11,7 @@ export const Reviews = () => {
   const getReviewsList = async id => {
     try {
       const res = await getReviews(id);
-      setReviews(res);
+      setReviews(res.results);
     } catch (error) {
       setError(error.message);
     }
@@ -20,5 +21,17 @@ export const Reviews = () => {
     getReviewsList(movieId);
   }, [movieId]);
   console.log(reviews);
-  return <h1>reviews</h1>;
+  return (
+    <ul>
+      {error && (
+        <p>{'List of reviews is not available 😕. Please, try again later'}</p>
+      )}
+      {reviews.map(({ author, content }) => (
+        <Item key={author}>
+          <Title>{author}</Title>
+          <p>{content}</p>
+        </Item>
+      ))}
+    </ul>
+  );
 };
