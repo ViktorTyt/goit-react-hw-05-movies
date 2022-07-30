@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 12px;
 `;
 export const Image = styled.img`
   max-width: 100%;
@@ -16,7 +17,7 @@ export const Image = styled.img`
 export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-left: -30px;
   margin-bottom: -30px;
 `;
@@ -28,6 +29,8 @@ export const Item = styled.li`
   justify-content: space-between;
   margin-left: 30px;
   margin-bottom: 30px;
+  border-radius: 4px;
+  background-color: ${theme.colors.sand};
   box-shadow: ${theme.shadows.small};
 
   @media screen and (min-width: 768px) {
@@ -57,6 +60,8 @@ export const Title = styled.h3`
 export const Role = styled.p`
   font-size: ${theme.fontSizes.medium};
   text-align: center;
+  // height: 80px;
+  overflow-y: auto;
   margin-bottom: 0;
 `;
 

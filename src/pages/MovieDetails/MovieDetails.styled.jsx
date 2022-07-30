@@ -6,7 +6,9 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin-bottom: ${theme.spacing(5)};
   box-shadow: ${theme.shadows.regular};
+  background-color: ${theme.colors.sand};
 
   @media screen and (min-width: 768px) {
     flex-wrap: nowrap;
@@ -37,7 +39,10 @@ export const MoreInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${theme.spacing(6)};
+  padding: ${theme.spacing(3)};
+  background-color: ${theme.colors.sand};
+  box-shadow: ${theme.shadows.regular};
+  margin-bottom: ${theme.spacing(5)};
 `;
 
 export const MoreInfoTitle = styled.h3`
@@ -51,6 +56,10 @@ export const Link = styled(NavLink)`
   text-decoration: none;
   color: black;
   font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   &.active {
     color: white;

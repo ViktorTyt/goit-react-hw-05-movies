@@ -7,6 +7,7 @@ export const theme = Object.freeze({
     dark: '#212121',
     darkOpange: '#ff7700',
     royalBlue: '#4169E1',
+    sand: '#c2b280',
 
     mainBackground: ['linear-gradient(to bottom, #c9d6ff,  #e2e2e2)'],
     tagBackground: ['linear-gradient(to bottom, #FFD194, #D1913C)'],

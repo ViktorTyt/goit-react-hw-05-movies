@@ -1,12 +1,18 @@
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 
+export const Wrapper = styled.ul`
+  padding-bottom: 12px;
+`;
 export const Item = styled.li`
+  // margin-bottom: 12px;
   padding: ${theme.spacing(3)};
-  box-shadow: ${theme.shadows.medium};
+  box-shadow: ${theme.shadows.regular};
+  background-color: ${theme.colors.sand};
+  border-radius: 4px;
 
   &:not(:last-child) {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 `;
 

@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
+import { Form, Button } from './SearchBar.styled';
 
 export const SearchBar = ({ query, onChange, onSubmit }) => {
   return (
     <div>
-      <form action="" onSubmit={onSubmit}>
+      <Form action="" onSubmit={onSubmit}>
         <input
           type="text"
           name="query"
           value={query}
           onChange={({ target: { value } }) => onChange(value)}
         />
-        <button type="submit">Search</button>
-      </form>
+        <Button type="submit">Search</Button>
+      </Form>
     </div>
   );
 };

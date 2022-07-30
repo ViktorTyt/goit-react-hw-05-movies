@@ -12,6 +12,7 @@ import {
 
 import { SRCKEY, getMovieDetails } from '../../services/API';
 import { Outlet } from 'react-router-dom';
+import imageNotFound from '../../images/image_not_available.jpg';
 
 export const MovieDetails = () => {
   const [movie, setMovie] = useState({});
@@ -41,8 +42,13 @@ export const MovieDetails = () => {
   return (
     <main>
       <section>
+        <Link to={'/movies'}>Go back</Link>
         <Wrapper>
-          <Image src={`${SRCKEY}${poster_path}`} alt={title} loading="lazy" />
+          <Image
+            src={poster_path ? `${SRCKEY}${poster_path}` : imageNotFound}
+            alt={title}
+            loading="lazy"
+          />
 
           <Description>
             <h1>{title}</h1>

@@ -1,7 +1,7 @@
 import { getReviews } from '../../services/API';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Item, Title } from './Reviews.styled';
+import { Wrapper, Item, Title } from './Reviews.styled';
 
 export const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -22,16 +22,16 @@ export const Reviews = () => {
   }, [movieId]);
   console.log(reviews);
   return (
-    <ul>
+    <Wrapper>
       {error && (
         <p>{'List of reviews is not available 😕. Please, try again later'}</p>
       )}
-      {reviews.map(({ author, content }) => (
-        <Item key={author}>
+      {reviews.map(({ author, content }, index) => (
+        <Item key={index + 1}>
           <Title>{author}</Title>
           <p>{content}</p>
         </Item>
       ))}
-    </ul>
+    </Wrapper>
   );
 };

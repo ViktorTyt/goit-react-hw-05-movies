@@ -3,14 +3,19 @@ import { Container, Header, Link } from './SharedLayout.styled';
 
 export const SharedLayout = () => {
   return (
-    <Container>
+    <main>
       <Header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link>
-        </nav>
+        <Container>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/movies">Movies</Link>
+          </nav>
+        </Container>
       </Header>
-      <Outlet />
-    </Container>
+
+      <Container>
+        <Outlet />
+      </Container>
+    </main>
   );
 };
