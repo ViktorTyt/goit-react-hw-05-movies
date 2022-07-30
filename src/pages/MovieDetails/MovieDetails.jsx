@@ -38,6 +38,8 @@ export const MovieDetails = () => {
     //   }
   }, [movieId]);
 
+  console.log(error);
+
   const { title, vote_average, overview, poster_path } = movie;
   return (
     <main>

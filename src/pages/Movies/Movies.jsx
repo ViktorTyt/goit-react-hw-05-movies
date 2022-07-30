@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { getFindMovies } from '../../services/API';
-import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
-import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MoviesList } from 'components/MoviesList/MoviesList';
+import { SearchBar } from 'components/SearchBar/SearchBar';
+import { useEffect, useState } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { getFindMovies } from '../../services/API';
 
 export const Movies = () => {
   const [query, setQuery] = useState('');

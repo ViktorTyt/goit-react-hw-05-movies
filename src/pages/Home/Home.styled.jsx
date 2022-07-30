@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import { theme } from '../../styles';
 
 export const Link = styled(NavLink)`
   color: black;
