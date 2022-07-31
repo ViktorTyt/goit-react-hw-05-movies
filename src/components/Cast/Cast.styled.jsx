@@ -74,3 +74,7 @@ export const Button = styled.button`
   color: ${theme.colors.white};
   background-color: ${theme.colors.royalBlue};
 `;
+
+export const Message = styled.p`
+  font-size: ${theme.fontSizes.medium};
+`;

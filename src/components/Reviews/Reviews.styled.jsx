@@ -18,5 +18,10 @@ export const Item = styled.li`
 
 export const Title = styled.p`
   font-size: ${theme.fontSizes.medium};
-  color: ${theme.colors.royalBlue};
+  color: ${theme.colors.dark};
+  font-weight: bold;
+`;
+
+export const Message = styled.p`
+  font-size: ${theme.fontSizes.medium};
 `;

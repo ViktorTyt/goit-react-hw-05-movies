@@ -54,6 +54,7 @@ export const Link = styled(NavLink)`
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
+  font-size: ${theme.fontSizes.medium};
   color: black;
   font-weight: 500;
 
@@ -65,4 +66,8 @@ export const Link = styled(NavLink)`
     color: white;
     background-color: ${theme.colors.royalBlue};
   }
+`;
+
+export const Message = styled.p`
+  font-size: ${theme.fontSizes.medium};
 `;

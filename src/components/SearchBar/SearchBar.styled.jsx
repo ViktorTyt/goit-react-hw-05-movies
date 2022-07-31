@@ -4,13 +4,14 @@ import { theme } from '../../styles';
 export const Form = styled.form`
   position: relative;
   display: flex;
-  height: 24px;
+  height: 32px;
   width: 272px;
   margin-bottom: 12px;
 
   > input {
     width: 100%;
     height: 100%;
+    font-size: ${theme.fontSizes.medium};
     border-radius: 4px;
     padding: 0 0 0 8px;
     border: 2px solid ${theme.colors.dark};
@@ -27,9 +28,9 @@ export const Button = styled.button`
   top: 0;
   right: 0;
   width: 72px;
-  height: 28px;
-  background-color: ${theme.colors.royalBlue};
-  color: ${theme.colors.white};
+  height: 36px;
+  background-color: ${theme.colors.sand};
+  // color: ${theme.colors.dark};
   font-size: 16px;
   font-weight: 700;
   text-align: center;

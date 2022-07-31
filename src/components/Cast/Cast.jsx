@@ -10,18 +10,21 @@ import {
   Thumb,
   Role,
   Button,
+  Message,
 } from './Cast.styled';
-// import { MdImageNotSupported } from 'react-icons/md';
+import { Loader } from 'components/Loader/Loader';
 import imageNotFound from '../../images/image_not_available.jpg';
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isShowAllCast, setIsShowAllCast] = useState(false);
   const [isShowButton, setIsShowButton] = useState(false);
   const { movieId } = useParams();
 
   const getCastList = async id => {
+    setIsLoading(true);
     try {
       const { cast } = await getCast(id);
       setCast(cast);
@@ -30,6 +33,8 @@ export const Cast = () => {
       }
     } catch (error) {
       setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,9 +49,12 @@ export const Cast = () => {
 
   return (
     <Wrapper>
+      {isLoading && <Loader />}
       <List>
         {error && (
-          <p>{'List of cast is not available 😕. Please, try again later'}</p>
+          <Message>
+            'List of cast is not available 😕. Please, try again later'
+          </Message>
         )}
         {cast
           .filter((_, index) => index <= 11)

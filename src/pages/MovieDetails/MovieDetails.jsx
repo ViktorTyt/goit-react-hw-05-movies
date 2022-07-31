@@ -1,50 +1,58 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import {
-  Wrapper,
-  Image,
   Description,
   Genres,
+  Image,
   Link,
   MoreInfoBox,
   MoreInfoTitle,
+  Wrapper,
+  Message,
 } from './MovieDetails.styled';
 
-import { SRCKEY, getMovieDetails } from '../../services/API';
+import { Loader } from 'components/Loader/Loader';
 import { Outlet } from 'react-router-dom';
 import imageNotFound from '../../images/image_not_available.jpg';
+import { getMovieDetails, SRCKEY } from '../../services/API';
 
 export const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
+  const location = useLocation();
+  const goBack = location?.state?.from ?? '/';
 
   const getInfoAboutMovie = async id => {
+    setIsLoading(true);
     try {
       const results = await getMovieDetails(id);
       setMovie(results);
       setGenres(results.genres);
     } catch (error) {
       setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getInfoAboutMovie(movieId);
-
-    //   return () => {
-    //     second
-    //   }
   }, [movieId]);
-
-  console.log(error);
 
   const { title, vote_average, overview, poster_path } = movie;
   return (
     <main>
       <section>
-        <Link to={'/movies'}>Go back</Link>
+        {error && (
+          <Message>
+            'Movie is not available 😕. Please, try again later'
+          </Message>
+        )}
+        {isLoading && <Loader />}
+        <Link to={goBack}>Go back</Link>
         <Wrapper>
           <Image
             src={poster_path ? `${SRCKEY}${poster_path}` : imageNotFound}
