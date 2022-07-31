@@ -10,9 +10,7 @@ export const Image = styled.img`
   max-width: 100%;
   height: auto;
   flex-grow: 1;
-
   align-items: center;
-  // box-shadow: ${theme.shadows.regular};
 `;
 export const List = styled.ul`
   display: flex;

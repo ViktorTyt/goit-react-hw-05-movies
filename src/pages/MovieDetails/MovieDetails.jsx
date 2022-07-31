@@ -25,21 +25,21 @@ export const MovieDetails = () => {
   const location = useLocation();
   const goBack = location?.state?.from ?? '/';
 
-  const getInfoAboutMovie = async id => {
-    setIsLoading(true);
-    try {
-      const results = await getMovieDetails(id);
-      setMovie(results);
-      setGenres(results.genres);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getInfoAboutMovie(movieId);
+    const getInfoAboutMovie = async () => {
+      setIsLoading(true);
+      try {
+        const results = await getMovieDetails(movieId);
+        setMovie(results);
+        setGenres(results.genres);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getInfoAboutMovie();
   }, [movieId]);
 
   const { title, vote_average, overview, poster_path } = movie;
@@ -48,7 +48,7 @@ export const MovieDetails = () => {
       <section>
         {error && (
           <Message>
-            'Movie is not available 😕. Please, try again later'
+            {'Movie is not available 😕. Please, try again later'}
           </Message>
         )}
         {isLoading && <Loader />}

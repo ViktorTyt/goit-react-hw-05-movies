@@ -6,12 +6,14 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+
   margin-bottom: ${theme.spacing(5)};
   box-shadow: ${theme.shadows.regular};
   background-color: ${theme.colors.sand};
 
   @media screen and (min-width: 768px) {
     flex-wrap: nowrap;
+    height: 360px;
   }
 `;
 
@@ -20,13 +22,14 @@ export const Image = styled.img`
   max-width: 100%;
 
   @media screen and (min-width: 768px) {
-    height: auto;
+    height: 100%;
     max-width: 280px;
   }
 `;
 
 export const Description = styled.div`
   padding: 24px;
+  overflow-y: auto;
 `;
 
 export const Genres = styled.ul`
@@ -46,7 +49,8 @@ export const MoreInfoBox = styled.div`
 `;
 
 export const MoreInfoTitle = styled.h3`
-  font-size: ${theme.fontSizes.large};
+  font-size: ${theme.fontSizes.medium};
+  margin-bottom: ${theme.spacing(2)};
 `;
 export const Link = styled(NavLink)`
   display: inline-flex;

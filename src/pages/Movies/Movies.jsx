@@ -3,10 +3,12 @@ import { SearchBar } from 'components/SearchBar/SearchBar';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getFindMovies } from '../../services/API';
+import { Message } from 'pages/Movies/Movies.styled';
 
 export const Movies = () => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('name') ?? '';
 
@@ -24,13 +26,16 @@ export const Movies = () => {
   useEffect(() => {
     if (movieName === '') return;
 
-    const getMovies = async query => {
-      const { results } = await getFindMovies(query);
-
-      setMovies(results);
+    const getMovies = async () => {
+      try {
+        const { results } = await getFindMovies(movieName);
+        setMovies(results);
+      } catch (error) {
+        setError(error.message);
+      }
     };
 
-    getMovies(movieName);
+    getMovies();
   }, [movieName]);
 
   return (
@@ -40,7 +45,11 @@ export const Movies = () => {
         onChange={handleInputChange}
         onSubmit={handleFormSubmit}
       />
-      <MoviesList movies={movies} movieName={movieName} />
+      {!error ? (
+        <MoviesList movies={movies} movieName={movieName} />
+      ) : (
+        <Message>Server is not available 😕. Please, try again later</Message>
+      )}
     </main>
   );
 };

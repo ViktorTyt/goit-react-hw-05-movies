@@ -10,20 +10,20 @@ export const Reviews = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
 
-  const getReviewsList = async id => {
-    setIsLoading(true);
-    try {
-      const res = await getReviews(id);
-      setReviews(res.results);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getReviewsList(movieId);
+    const getReviewsList = async () => {
+      setIsLoading(true);
+      try {
+        const res = await getReviews(movieId);
+        setReviews(res.results);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getReviewsList();
   }, [movieId]);
 
   return (

@@ -13,7 +13,6 @@ export const Header = styled.header`
   width: 100%;
   padding: 12px 0;
   margin-bottom: ${theme.spacing(6)};
-  // border-bottom: 1px solid black;
   background-color: #17080d;
   box-shadow: ${theme.shadows.regular};
 

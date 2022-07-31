@@ -30,17 +30,18 @@ export const Button = styled.button`
   width: 72px;
   height: 36px;
   background-color: ${theme.colors.sand};
-  // color: ${theme.colors.dark};
   font-size: 16px;
   font-weight: 700;
   text-align: center;
   border-radius: 4px;
   border: 2px solid ${theme.colors.dark};
   transition: ${theme.animation.cubicBezierV2};
+
   :hover {
     color: ${theme.colors.white};
     background-color: ${theme.colors.royalBlue};
   }
+
   :active {
     border: none;
   }

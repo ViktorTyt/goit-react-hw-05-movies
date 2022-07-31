@@ -1,19 +1,19 @@
-import { SRCKEY, getCast } from '../../services/API';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import {
-  Wrapper,
-  Image,
-  List,
-  Item,
-  Title,
-  Thumb,
-  Role,
-  Button,
-  Message,
-} from './Cast.styled';
 import { Loader } from 'components/Loader/Loader';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import imageNotFound from '../../images/image_not_available.jpg';
+import { getCast, SRCKEY } from '../../services/API';
+import {
+  Button,
+  Image,
+  Item,
+  List,
+  Message,
+  Role,
+  Thumb,
+  Title,
+  Wrapper,
+} from './Cast.styled';
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -23,22 +23,22 @@ export const Cast = () => {
   const [isShowButton, setIsShowButton] = useState(false);
   const { movieId } = useParams();
 
-  const getCastList = async id => {
-    setIsLoading(true);
-    try {
-      const { cast } = await getCast(id);
-      setCast(cast);
-      if (cast.length > 11) {
-        setIsShowButton(true);
-      }
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const getCastList = async id => {
+      setIsLoading(true);
+      try {
+        const { cast } = await getCast(id);
+        setCast(cast);
+        if (cast.length > 11) {
+          setIsShowButton(true);
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     getCastList(movieId);
   }, [movieId]);
 
@@ -53,7 +53,7 @@ export const Cast = () => {
       <List>
         {error && (
           <Message>
-            'List of cast is not available 😕. Please, try again later'
+            {'List of cast is not available 😕. Please, try again later'}
           </Message>
         )}
         {cast
