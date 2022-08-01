@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import {
   Description,
@@ -81,7 +81,9 @@ export const MovieDetails = () => {
           <Link to="reviews">Reviews</Link>
         </ul>
       </MoreInfoBox>
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
