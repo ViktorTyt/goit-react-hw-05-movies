@@ -45,42 +45,47 @@ export const MovieDetails = () => {
   const { title, vote_average, overview, poster_path } = movie;
   return (
     <main>
-      <section>
-        {error && (
-          <Message>
-            {'Movie is not available 😕. Please, try again later'}
-          </Message>
-        )}
-        {isLoading && <Loader />}
-        <Link to={goBack}>Go back</Link>
-        <Wrapper>
-          <Image
-            src={poster_path ? `${SRCKEY}${poster_path}` : imageNotFound}
-            alt={title}
-            loading="lazy"
-          />
+      {isLoading && <Loader />}
 
-          <Description>
-            <h1>{title}</h1>
-            <p>User score: {Math.round(vote_average * 10)}%</p>
-            <h3>Overview</h3>
-            <p>{overview}</p>
-            <h3>Genres</h3>
-            <Genres>
-              {genres.map(({ name }, index) => (
-                <li key={index + 1}>{name} </li>
-              ))}
-            </Genres>
-          </Description>
-        </Wrapper>
-      </section>
-      <MoreInfoBox>
-        <MoreInfoTitle>Additianal information</MoreInfoTitle>
-        <ul>
-          <Link to="cast">Cast</Link>
-          <Link to="reviews">Reviews</Link>
-        </ul>
-      </MoreInfoBox>
+      {error && (
+        <Message>
+          {'Movie is not available 😕. Please, try again later'}
+        </Message>
+      )}
+      {!error && (
+        <section>
+          <Link to={goBack}>Go back</Link>
+          <Wrapper>
+            <Image
+              src={poster_path ? `${SRCKEY}${poster_path}` : imageNotFound}
+              alt={title}
+              loading="lazy"
+            />
+
+            <Description>
+              <h1>{title}</h1>
+              <p>User score: {Math.round(vote_average * 10)}%</p>
+              <h3>Overview</h3>
+              <p>{overview}</p>
+              <h3>Genres</h3>
+              <Genres>
+                {genres.map(({ name }, index) => (
+                  <li key={index + 1}>{name} </li>
+                ))}
+              </Genres>
+            </Description>
+          </Wrapper>
+
+          <MoreInfoBox>
+            <MoreInfoTitle>Additianal information</MoreInfoTitle>
+            <ul>
+              <Link to="cast">Cast</Link>
+              <Link to="reviews">Reviews</Link>
+            </ul>
+          </MoreInfoBox>
+        </section>
+      )}
+
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
