@@ -14,8 +14,8 @@ export const Reviews = () => {
     const getReviewsList = async () => {
       setIsLoading(true);
       try {
-        const res = await getReviews(movieId);
-        setReviews(res.results);
+        const { results } = await getReviews(movieId);
+        setReviews(results);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -30,7 +30,7 @@ export const Reviews = () => {
     <Wrapper>
       {error && (
         <Message>
-          List of reviews is not available 😕. Please, try again later
+          {'List of reviews is not available 😕. Please, try again later'}
         </Message>
       )}
 
@@ -44,8 +44,8 @@ export const Reviews = () => {
           </Item>
         ))}
 
-      {reviews.length === 0 && !error && (
-        <Message>We don`t have any reviews for this movie</Message>
+      {!isLoading && reviews.length === 0 && !error && (
+        <Message>{'We don`t have any reviews for this movie'}</Message>
       )}
     </Wrapper>
   );

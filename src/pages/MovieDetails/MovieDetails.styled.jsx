@@ -74,4 +74,5 @@ export const Link = styled(NavLink)`
 
 export const Message = styled.p`
   font-size: ${theme.fontSizes.medium};
+  text-align: center;
 `;

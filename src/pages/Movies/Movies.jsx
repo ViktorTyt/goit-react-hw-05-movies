@@ -1,5 +1,6 @@
 import { MoviesList } from 'components/MoviesList';
 import { SearchBar } from 'components/SearchBar';
+import { Loader } from 'components/Loader';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getFindMovies } from '../../services/API';
@@ -9,6 +10,7 @@ export const Movies = () => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('name') ?? '';
 
@@ -21,17 +23,20 @@ export const Movies = () => {
     const nextParams = name !== '' ? { name } : {};
     setSearchParams(nextParams);
     setQuery('');
+    setMovies([]);
   };
 
   useEffect(() => {
     if (movieName === '') return;
-
+    setIsLoading(true);
     const getMovies = async () => {
       try {
         const { results } = await getFindMovies(movieName);
         setMovies(results);
       } catch (error) {
         setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -46,10 +51,22 @@ export const Movies = () => {
         onSubmit={handleFormSubmit}
       />
 
+      {isLoading && <Loader />}
+
+      {!isLoading && movieName && movies.length === 0 && (
+        <Message>
+          {
+            'No movies with this title were found 😕. Please, enter the correct name of the movie'
+          }
+        </Message>
+      )}
+
       {!error ? (
         <MoviesList movies={movies} movieName={movieName} />
       ) : (
-        <Message>Server is not available 😕. Please, try again later</Message>
+        <Message>
+          {'Server is not available 😕. Please, try again later'}
+        </Message>
       )}
     </main>
   );

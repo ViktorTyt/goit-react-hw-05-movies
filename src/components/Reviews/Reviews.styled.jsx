@@ -22,5 +22,6 @@ export const Title = styled.p`
 `;
 
 export const Message = styled.p`
+  text-align: center;
   font-size: ${theme.fontSizes.medium};
 `;

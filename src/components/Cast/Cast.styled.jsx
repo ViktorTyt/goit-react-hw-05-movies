@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
+
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding-bottom: 12px;
 `;
 export const Image = styled.img`
@@ -58,7 +56,6 @@ export const Title = styled.h3`
 export const Role = styled.p`
   font-size: ${theme.fontSizes.medium};
   text-align: center;
-  // height: 80px;
   overflow-y: auto;
   margin-bottom: 0;
 `;
@@ -75,4 +72,6 @@ export const Button = styled.button`
 
 export const Message = styled.p`
   font-size: ${theme.fontSizes.medium};
+  text-align: center;
+  margin-top: 30px;
 `;

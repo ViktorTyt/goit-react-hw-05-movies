@@ -98,8 +98,8 @@ export const Cast = () => {
         </Button>
       )}
 
-      {cast.length === 0 && !error && (
-        <Message>We don`t have any actors for this movie</Message>
+      {!isLoading && cast.length === 0 && !error && (
+        <Message>{'We don`t have any actors for this movie'}</Message>
       )}
     </Wrapper>
   );
