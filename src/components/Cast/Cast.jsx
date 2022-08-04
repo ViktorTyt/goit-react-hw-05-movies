@@ -1,4 +1,4 @@
-import { Loader } from 'components/Loader/Loader';
+import { Loader } from 'components/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import imageNotFound from '../../images/image_not_available.jpg';
@@ -50,12 +50,14 @@ export const Cast = () => {
   return (
     <Wrapper>
       {isLoading && <Loader />}
+
+      {error && (
+        <Message>
+          {'List of cast is not available 😕. Please, try again later'}
+        </Message>
+      )}
+
       <List>
-        {error && (
-          <Message>
-            {'List of cast is not available 😕. Please, try again later'}
-          </Message>
-        )}
         {cast
           .filter((_, index) => index <= 11)
           .map(({ id, character, name, profile_path }) => (
@@ -70,6 +72,7 @@ export const Cast = () => {
               </Thumb>
             </Item>
           ))}
+
         {isShowAllCast &&
           cast
             .filter((_, index) => index > 11)
@@ -88,10 +91,15 @@ export const Cast = () => {
               </Item>
             ))}
       </List>
+
       {isShowButton && (
         <Button type="button" onClick={handleShowAllCast}>
           Show {cast.length - 12} more actors
         </Button>
+      )}
+
+      {cast.length === 0 && !error && (
+        <Message>We don`t have any actors for this movie</Message>
       )}
     </Wrapper>
   );

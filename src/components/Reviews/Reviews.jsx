@@ -1,7 +1,7 @@
 import { getReviews } from '../../services/API';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Loader } from 'components/Loader/Loader';
+import { Loader } from 'components/Loader';
 import { Wrapper, Item, Title, Message } from './Reviews.styled';
 
 export const Reviews = () => {
@@ -33,7 +33,9 @@ export const Reviews = () => {
           List of reviews is not available 😕. Please, try again later
         </Message>
       )}
+
       {isLoading && <Loader />}
+
       {reviews.length > 0 &&
         reviews.map(({ author, content }, index) => (
           <Item key={index + 1}>
@@ -41,6 +43,7 @@ export const Reviews = () => {
             <p>{content}</p>
           </Item>
         ))}
+
       {reviews.length === 0 && !error && (
         <Message>We don`t have any reviews for this movie</Message>
       )}

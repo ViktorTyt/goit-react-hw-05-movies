@@ -1,5 +1,5 @@
-import { MoviesList } from 'components/MoviesList/MoviesList';
-import { SearchBar } from 'components/SearchBar/SearchBar';
+import { MoviesList } from 'components/MoviesList';
+import { SearchBar } from 'components/SearchBar';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getFindMovies } from '../../services/API';
@@ -45,6 +45,7 @@ export const Movies = () => {
         onChange={handleInputChange}
         onSubmit={handleFormSubmit}
       />
+
       {!error ? (
         <MoviesList movies={movies} movieName={movieName} />
       ) : (

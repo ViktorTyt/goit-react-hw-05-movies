@@ -11,7 +11,7 @@ import {
   Message,
 } from './MovieDetails.styled';
 
-import { Loader } from 'components/Loader/Loader';
+import { Loader } from 'components/Loader';
 import { Outlet } from 'react-router-dom';
 import imageNotFound from '../../images/image_not_available.jpg';
 import { getMovieDetails, SRCKEY } from '../../services/API';
@@ -52,6 +52,7 @@ export const MovieDetails = () => {
           {'Movie is not available 😕. Please, try again later'}
         </Message>
       )}
+
       {!error && (
         <section>
           <Link to={goBack}>Go back</Link>
@@ -79,8 +80,12 @@ export const MovieDetails = () => {
           <MoreInfoBox>
             <MoreInfoTitle>Additianal information</MoreInfoTitle>
             <ul>
-              <Link to="cast">Cast</Link>
-              <Link to="reviews">Reviews</Link>
+              <Link to="cast" state={{ from: location?.state?.from ?? '/' }}>
+                Cast
+              </Link>
+              <Link to="reviews" state={{ from: location?.state?.from ?? '/' }}>
+                Reviews
+              </Link>
             </ul>
           </MoreInfoBox>
         </section>
